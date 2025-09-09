@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="my">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myanmar travel blog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Padauk', 'Myanmar3', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #FFD700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        nav ul li a:hover {
+            color: #FFD700;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .hero {
+            background: url('https://source.unsplash.com/random/1600x900/?myanmar,travel') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #FFD700;
+            color: #333;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #FFC400;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            font-size: 36px;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #4ca1af;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        
+        .destinations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .destination-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .destination-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        .card-content h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .read-more {
+            color: #4ca1af;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .read-more::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .read-more:hover::after {
+            transform: translateX(5px);
+        }
+        
+        .about {
+            background: #eef5f7;
+            padding: 60px 0;
+            margin: 50px 0;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .blog-posts {
+            margin-bottom: 50px;
+        }
+        
+        .post {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .post h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        
+        .post-meta {
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .post-meta i {
+            color: #4ca1af;
+            margin-right: 5px;
+        }
+        
+        .newsletter {
+            background: linear-gradient(to right, #2c3e50, #4ca1af);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+        
+        .newsletter-form button {
+            background: #FFD700;
+            color: #333;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background: #FFC400;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: #FFD700;
+        }
+        
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 5px;
+                padding: 12px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <div class="container header-content">
+        <div class="logo">Myanmar travel  <span>blog</span></div>
+        <nav>
+          <ul>
+            <li><a href="#home">Home page
+
+              </a></li>
+            <li><a href="#trips">Travelogues</a></li>
+             <li><a href="#about">About Me</a></li>
+            <li><a href="#blog">Photos</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <h1>Discover the beautiful places of Myanmar.
+        </h1>
+        <p>Travel to see ethnic cultures, natural beauty, and ancient
+          pagodas</p>
+        <a href="#trips" class="btn">View trips</a>
+      </div>
+    </section>
+
+    <!-- Featured Destinations -->
+     <section id="trips" class="container">
+      <h2 class="section-title">Popular tourist attractions</h2>
+      <div class="destinations">
+        <div class="destination-card">
+          <div class="card-img">
+            <img
+              src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcRiqxWG1FbZU-3Y_64X0L2QZ8kEcUdpuHfwfng3WmmPh7W-23NbYhJwzb12rmpKSLY-CmasUeHJFnf3FrW7YS_Zbaa6P-fMGbJGXfiEsA"
+              alt="Bagan">
+          </div>
+          <div class="card-content">
+            <h3>Bagan</h3>
+            <p>Home to thousands of ancient pagodas, the Bagan region is one of
+              Myanmar's most iconic sites.
+
+            </p>
+            <a href="https://en.wikipedia.org/wiki/Bagan" target="_blank"
+              class="read-more">Continue reading</a>
+          </div>
+        </div>
+        <div class="destination-card">
+          <div class="card-img">
+            <img
+              src="https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcQTVi45sxh6EzFNWdKDCIzjuD_VgKrID4LqCKV3wZ-ulxBgGkZYkzGZpyI103TydVr6YJJiSUFPr5X-xgJoGhAXfj5ajU7S0-ebud1POQ"
+              alt="Inle Lake">
+          </div>
+          <div class="card-content">
+            <h3>Inle Lake
+            </h3>
+            <p>Surrounded by mountains, Inle Lake is a place where you can watch
+              boat races and villages.</p>
+            <a href="https://en.wikipedia.org/wiki/Inle_Lake" target="_blank"
+              class="read-more">Continue reading</a>
+          </div>
+        </div>
+        <div class="destination-card">
+          <div class="card-img">
+            <img
+              src="https://lh3.googleusercontent.com/gps-cs-s/AC9h4npKz-sRAib-OTBwP63fRdde7q0S_ialSW3RUsKHJPM3gXVa-dIPCQ8O8iyZ0kpJE4pEL7M2Akttkwu4uN_-HpPgtZlL-wILxAKX4dwTYi1za64HqD2pDPzOrqbNl4KDVQpvv6UJwQ=w675-h390-n-k-no"
+              alt="Mandalay">
+          </div>
+          <div class="card-content">
+            <h3>Mandalay</h3>
+            <p>Mandalay, the last capital of Myanmar, is a thriving cultural and
+              artistic region.</p>
+            <a href="https://en.wikipedia.org/wiki/Mandalay" target="_blank"
+              class="read-more">Continue reading</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2 class="section-title">About me</h2>
+            <p>Hello, I'm a travel blogger. I travel to explore Myanmar's famous
+              landmarks and unexpected beautiful places, taking photos and
+              documenting them.<br>
+
+              I share my travel experiences and photos on this blog. I aim to
+              help all Burmese people learn more about the beauty of their
+              country and encourage tourism.</p>
+            <a href="#" class="btn">Continue reading about me</a>
+          </div>
+          <div class="about-img">
+            <img
+              src="https://www.wayfairertravel.com/hs-fs/hubfs/Imported%20sitepage%20images/shutterstock_2398908619_fbl654.jpg?width=1920&height=590&name=shutterstock_2398908619_fbl654.jpg"
+              alt="Travel">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recent Blog Posts -->
+    <section id="blog" class="container blog-posts">
+      <h2 class="section-title">Latest posts</h2>
+      <div class="post">
+        <h3>Snow-capped Chen Razi Mountains in Kachin State</h3>
+        <div class="post-meta">Date - January 15, 2025 | Cost - 750,000
+          kyats</div>
+        <p>Mount Chan Razi is the highest mountain in Myanmar and one of the
+          most beautiful snow-capped mountains. This trip will show you the
+          hardships of the journey, the kindness of the local people, and the
+          wonders of the natural landscape.</p>
+        <a href="https://en.wikipedia.org/wiki/Hkakabo_Razi" target="_blank" class="read-more">Continue reading</a>
+      </div>
+      <div class="post">
+        <h3>White Crane Village in Tanintharyi Region</h3>
+        <div class="post-meta">Date - December 5, 2025 | Cost - 400,000
+          kyats</div>
+        <p>The village of Dung Kyi Phyu is famous for its natural beauty. The
+          road to reach this village is difficult, but once you arrive, you will
+          be grateful for the beautiful scenery.</p>
+        <a href="https://en.wikipedia.org/wiki/Tanintharyi_Region" target="_blank" class="read-more">SContinue reading</a>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+      <div class="container">
+        <h2>Subscribe to the newsletter</h2>
+        <p>I'll send you my latest travelogues and travel tips.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email address.">
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+          <div class="footer-section">
+            <h3>Contact</h3>
+            <p>Email: info@thiritravelblog.com</p>
+            <p>Phone: +95 968 242 369 4</p>
+            <p>Address: Yangon, Myanmar</p>
+          </div>
+          <div class="footer-section">
+            <h3>Links</h3>
+            <p><a href="#home" style="color: #ddd;">Home page</a></p>
+            <p><a href="#about" style="color: #ddd;">About me</a></p>
+            <p><a href="#trips" style="color: #ddd;">Travel tips</a></p>
+            <p><a href="#" style="color: #ddd;">Privacy Policy</a></p>
+          </div>
+          <div class="footer-section">
+            <h3>Social networks</h3>
+            <p>Facebook: <a href="#" style="color: white;">travelblogbythiri</a></p>
+            <a>Instagram: <a href="#" style="color: white;">travelblogbythiri</a></p>
+            <p>Twitter:<a href="#" style="color: white;"> travelblogbythiri</a></p>
+            <p>YouTube: <a href="#" style="color: white;">travelblogbythiri</a></p>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; © 2025 Myanmar Travel Blog. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a, .btn[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+  </body>
+</html>
